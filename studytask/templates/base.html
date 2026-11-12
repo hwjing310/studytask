@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{% block title %}StudyTask 个人学习任务管理{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="{{ url_for('tasks.index') }}" aria-label="StudyTask 首页">
+        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span class="brand-text">
+          <strong>StudyTask</strong>
+          <small>个人学习任务管理</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="{{ url_for('tasks.index') }}">任务列表</a>
+        <a class="button button-small" href="{{ url_for('tasks.create') }}">+ 新建任务</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-list" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>StudyTask · 数据保存在本机 SQLite 数据库</span>
+      <span>单用户本地学习任务管理</span>
+    </div>
+  </footer>
+</body>
+</html>

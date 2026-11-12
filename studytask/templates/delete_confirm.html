@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}确认删除 · StudyTask{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="面包屑">
+  <a href="{{ url_for('tasks.index') }}">任务列表</a>
+  <span aria-hidden="true">/</span>
+  <a href="{{ url_for('tasks.detail', task_id=task.id) }}">任务详情</a>
+  <span aria-hidden="true">/</span>
+  <span>确认删除</span>
+</nav>
+
+<section class="panel confirm-panel">
+  <p class="eyebrow">删除确认</p>
+  <h1>确认删除这条任务？</h1>
+  <p class="confirm-text">
+    你将删除任务 <strong>“{{ task.name }}”</strong>
+    （{{ task.course }}，截止 {{ task.due_date }}）。
+    删除后无法恢复。
+  </p>
+  <form method="post" action="{{ url_for('tasks.delete', task_id=task.id) }}" class="form-actions">
+    <button class="button button-danger" type="submit">确认删除</button>
+    <a class="button button-ghost" href="{{ url_for('tasks.detail', task_id=task.id) }}">取消，返回详情</a>
+  </form>
+</section>
+{% endblock %}

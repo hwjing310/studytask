@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}任务列表 · StudyTask{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">学习计划</p>
+    <h1>我的学习任务</h1>
+    <p class="lead">集中管理课程任务，按截止日期和优先级安排学习节奏。</p>
+  </div>
+  <a class="button" href="{{ url_for('tasks.create') }}">+ 新建任务</a>
+</section>
+
+<section class="stats" aria-label="任务统计">
+  <article class="stat-card">
+    <span class="stat-label">任务总数</span>
+    <strong id="stat-total">{{ total }}</strong>
+    <span class="stat-note">全部课程任务</span>
+  </article>
+  <article class="stat-card">
+    <span class="stat-label">已完成</span>
+    <strong id="stat-completed">{{ completed }}</strong>
+    <span class="stat-note">状态为“已完成”</span>
+  </article>
+  <article class="stat-card stat-card-accent">
+    <span class="stat-label">完成率</span>
+    <strong id="stat-rate">{{ completion_rate }}%</strong>
+    <span class="stat-note">已完成 / 任务总数</span>
+  </article>
+</section>
+
+<section class="panel" aria-labelledby="task-list-heading">
+  <div class="panel-heading">
+    <div>
+      <h2 id="task-list-heading">任务列表</h2>
+      <p class="muted">当前显示 {{ tasks|length }} 条任务</p>
+    </div>
+  </div>
+
+  <form class="filters" method="get" action="{{ url_for('tasks.index') }}" aria-label="筛选任务">
+    <div class="filter-field">
+      <label for="filter-course">课程</label>
+      <select id="filter-course" name="course">
+        <option value="">全部课程</option>
+        {% for course in courses %}
+          <option value="{{ course }}" {% if filters.course == course %}selected{% endif %}>{{ course }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="filter-status">状态</label>
+      <select id="filter-status" name="status">
+        <option value="">全部状态</option>
+        {% for status in statuses %}
+          <option value="{{ status }}" {% if filters.status == status %}selected{% endif %}>{{ status }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="filter-priority">优先级</label>
+      <select id="filter-priority" name="priority">
+        <option value="">全部优先级</option>
+        {% for priority in priorities %}
+          <option value="{{ priority }}" {% if filters.priority == priority %}selected{% endif %}>{{ priority }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button class="button" type="submit">筛选</button>
+      <a class="button button-ghost" href="{{ url_for('tasks.index') }}">重置</a>
+    </div>
+  </form>
+
+  {% if tasks %}
+    <div class="table-wrap">
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th scope="col">任务名称</th>
+            <th scope="col">所属课程</th>
+            <th scope="col">截止日期</th>
+            <th scope="col">状态</th>
+            <th scope="col">优先级</th>
+            <th scope="col">提醒</th>
+            <th scope="col"><span class="sr-only">操作</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in tasks %}
+            <tr data-task-id="{{ task.id }}">
+              <td>
+                <a class="task-link" href="{{ url_for('tasks.detail', task_id=task.id) }}">{{ task.name }}</a>
+              </td>
+              <td>{{ task.course }}</td>
+              <td><time datetime="{{ task.due_date }}">{{ task.due_date }}</time></td>
+              <td>
+                <span class="status-badge {% if task.status == '已完成' %}status-done{% elif task.status == '进行中' %}status-doing{% else %}status-todo{% endif %}">
+                  {{ task.status }}
+                </span>
+              </td>
+              <td>
+                <span class="priority-badge {% if task.priority == '高' %}priority-high{% elif task.priority == '中' %}priority-medium{% else %}priority-low{% endif %}">
+                  {{ task.priority }}
+                </span>
+              </td>
+              <td>
+                {% if task.alert %}
+                  <span class="reminder reminder-{{ task.alert.kind }}">{{ task.alert.label }}</span>
+                {% else %}
+                  <span class="muted">—</span>
+                {% endif %}
+              </td>
+              <td class="table-actions">
+                <a href="{{ url_for('tasks.detail', task_id=task.id) }}">查看详情</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      {% if filters.course or filters.status or filters.priority %}
+        <span class="empty-icon" aria-hidden="true">⌕</span>
+        <h3>没有符合筛选条件的任务</h3>
+        <p>尝试调整课程、状态或优先级条件。</p>
+        <a class="button button-ghost" href="{{ url_for('tasks.index') }}">清除筛选</a>
+      {% else %}
+        <span class="empty-icon" aria-hidden="true">＋</span>
+        <h3>还没有学习任务</h3>
+        <p>创建第一条任务，开始安排你的学习计划。</p>
+        <a class="button" href="{{ url_for('tasks.create') }}">+ 新建任务</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

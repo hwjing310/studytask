@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}{% if mode == 'create' %}新建任务{% else %}编辑任务{% endif %} · StudyTask{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="面包屑">
+  <a href="{{ url_for('tasks.index') }}">任务列表</a>
+  <span aria-hidden="true">/</span>
+  <span>{% if mode == 'create' %}新建任务{% else %}编辑任务{% endif %}</span>
+</nav>
+
+<section class="page-heading">
+  <p class="eyebrow">{% if mode == 'create' %}创建任务{% else %}修改任务{% endif %}</p>
+  <h1>{% if mode == 'create' %}新建学习任务{% else %}编辑学习任务{% endif %}</h1>
+  <p class="lead">带 <span class="required">*</span> 的字段为必填项。</p>
+</section>
+
+<section class="panel form-panel">
+  {% if errors %}
+    <div class="form-alert" role="alert">
+      请检查表单中的错误提示，修正后再提交。
+    </div>
+  {% endif %}
+
+  <form method="post" class="task-form">
+    <div class="form-grid">
+      <div class="form-field form-field-full">
+        <label for="name">任务名称 <span class="required">*</span></label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          maxlength="100"
+          required
+          value="{{ values.name }}"
+          placeholder="例如：完成高等数学第三章习题"
+          aria-invalid="{{ 'true' if errors.name else 'false' }}"
+          class="{% if errors.name %}input-error{% endif %}"
+        >
+        {% if errors.name %}<p class="field-error">{{ errors.name }}</p>{% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="course">所属课程 <span class="required">*</span></label>
+        <input
+          id="course"
+          name="course"
+          type="text"
+          maxlength="60"
+          required
+          value="{{ values.course }}"
+          placeholder="例如：高等数学"
+          aria-invalid="{{ 'true' if errors.course else 'false' }}"
+          class="{% if errors.course %}input-error{% endif %}"
+        >
+        {% if errors.course %}<p class="field-error">{{ errors.course }}</p>{% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="due_date">截止日期 <span class="required">*</span></label>
+        <input
+          id="due_date"
+          name="due_date"
+          type="date"
+          required
+          value="{{ values.due_date }}"
+          aria-invalid="{{ 'true' if errors.due_date else 'false' }}"
+          class="{% if errors.due_date %}input-error{% endif %}"
+        >
+        <p class="field-help">格式：YYYY-MM-DD</p>
+        {% if errors.due_date %}<p class="field-error">{{ errors.due_date }}</p>{% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="priority">优先级 <span class="required">*</span></label>
+        <select id="priority" name="priority" required>
+          {% for priority in priorities %}
+            <option value="{{ priority }}" {% if values.priority == priority %}selected{% endif %}>{{ priority }}</option>
+          {% endfor %}
+        </select>
+        {% if errors.priority %}<p class="field-error">{{ errors.priority }}</p>{% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="status">状态 <span class="required">*</span></label>
+        <select id="status" name="status" required>
+          {% for status in statuses %}
+            <option value="{{ status }}" {% if values.status == status %}selected{% endif %}>{{ status }}</option>
+          {% endfor %}
+        </select>
+        {% if errors.status %}<p class="field-error">{{ errors.status }}</p>{% endif %}
+      </div>
+
+      <div class="form-field form-field-full">
+        <label for="description">任务描述</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="6"
+          maxlength="1000"
+          placeholder="选填：补充任务要求、资料位置或完成标准"
+          aria-invalid="{{ 'true' if errors.description else 'false' }}"
+          class="{% if errors.description %}input-error{% endif %}"
+        >{{ values.description }}</textarea>
+        <p class="field-help">选填，最多 1000 个字符。</p>
+        {% if errors.description %}<p class="field-error">{{ errors.description }}</p>{% endif %}
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="button" type="submit">{% if mode == 'create' %}创建任务{% else %}保存修改{% endif %}</button>
+      {% if mode == 'edit' %}
+        <a class="button button-ghost" href="{{ url_for('tasks.detail', task_id=task.id) }}">取消</a>
+      {% else %}
+        <a class="button button-ghost" href="{{ url_for('tasks.index') }}">取消</a>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

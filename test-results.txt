@@ -1,0 +1,24 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- H:\temp\studytask\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: H:\temp\studytask
+collecting ... collected 16 items
+
+tests/test_tasks.py::test_t1_create_task_with_defaults PASSED            [  6%]
+tests/test_tasks.py::test_t1_invalid_input_is_rejected_without_writes PASSED [ 12%]
+tests/test_tasks.py::test_boundary_values_are_accepted PASSED            [ 18%]
+tests/test_tasks.py::test_t2_list_and_detail_show_required_fields PASSED [ 25%]
+tests/test_tasks.py::test_t3_edit_updates_list_and_detail PASSED         [ 31%]
+tests/test_tasks.py::test_t4_delete_requires_confirmation_and_removes_task PASSED [ 37%]
+tests/test_tasks.py::test_t5_status_can_change_between_all_states PASSED [ 43%]
+tests/test_tasks.py::test_t6_combined_filters PASSED                     [ 50%]
+tests/test_tasks.py::test_t7_overdue_and_upcoming_rules PASSED           [ 56%]
+tests/test_tasks.py::test_t8_dashboard_statistics PASSED                 [ 62%]
+tests/test_tasks.py::test_t9_data_survives_restart PASSED                [ 68%]
+tests/test_tasks.py::test_t10_chinese_pages_and_404 PASSED               [ 75%]
+tests/test_tasks.py::test_invalid_status_update_is_rejected PASSED       [ 81%]
+tests/test_tasks.py::test_filter_with_no_matches_shows_clear_empty_state PASSED [ 87%]
+tests/test_tasks.py::test_homepage_handles_200_tasks PASSED              [ 93%]
+tests/test_tasks.py::test_init_db_command_is_idempotent PASSED           [100%]
+
+============================= 16 passed in 1.00s ==============================
