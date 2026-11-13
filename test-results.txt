@@ -21,4 +21,4 @@ tests/test_tasks.py::test_filter_with_no_matches_shows_clear_empty_state PASSED 
 tests/test_tasks.py::test_homepage_handles_200_tasks PASSED              [ 93%]
 tests/test_tasks.py::test_init_db_command_is_idempotent PASSED           [100%]
 
-============================= 16 passed in 1.00s ==============================
+============================= 16 passed in 1.97s ==============================

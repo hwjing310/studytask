@@ -5,11 +5,13 @@
 
 ![首页](docs/screenshots/home.png)
 
-## 在线演示与代码仓库
+## 演示与代码仓库
 
 - GitHub 仓库：<https://github.com/hwjing310/StudyTask>
-- 在线演示：**部署完成后填写**
-- 本地地址：<http://127.0.0.1:5000>
+- 本地 Web 地址：<http://127.0.0.1:5000>
+- 公网部署入口：<https://render.com/deploy?repo=https://github.com/hwjing310/StudyTask>（登录 Render 后按 Blueprint 创建，部署完成后会生成 `*.onrender.com` 地址）
+
+> 仓库中的 `render.yaml` 已配置构建和启动命令。临时隧道地址不写入仓库，避免失效链接；课程提交时请使用自己部署生成的固定公网地址。
 
 ## 功能范围
 
@@ -57,10 +59,12 @@ studytask/
 │  └─ test_tasks.py             # 16 条自动化测试
 ├─ docs/
 │  ├─ 需求验收表.md
-│  ├─ StudyTask_测试记录.docx    # 16 页，含 16 张实际运行截图
+│  ├─ StudyTask_测试记录.docx    # 2026-11-11 初测，16 页，含 16 张实际运行截图
+│  ├─ 验收复测记录_2026-11-14.docx # 2026-11-14 独立数据库复测，T1—T10
 │  ├─ 实验报告.docx              # 4 页
 │  ├─ 演示PPT.pptx               # 8 页
-│  └─ screenshots/              # README/报告/PPT 用图
+│  ├─ screenshots/              # README/报告/PPT 用图
+│  └─ retest/screenshots/       # 复测截图
 ├─ AI_DEV_LOG.md                # AI 协作过程记录
 ├─ requirements.txt
 ├─ render.yaml / Dockerfile / Procfile
@@ -112,9 +116,11 @@ python app.py
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-结果：**16 passed in 1.00s**。测试使用临时 SQLite 数据库，不改变正式验收数据。原始输出见 `test-results.txt`，汇总见 `TEST_RESULTS.md`。
+结果：**16 passed**。测试使用临时 SQLite 数据库，不改变正式验收数据。原始输出见 `test-results.txt`，汇总见 `TEST_RESULTS.md`。
 
 测试覆盖：创建与校验、边界值、列表/详情、编辑、删除确认、状态流转、组合筛选、逾期/即将到期、统计、持久化、404、200 条任务规模、init-db 幂等性。
+
+2026-11-14 使用独立数据库和相对当前日期重新执行 T1—T10，结果为 **10/10 通过**，详见 [验收复测记录](docs/验收复测记录_2026-11-14.docx)。
 
 ## T1—T10 验收结果
 
@@ -134,9 +140,10 @@ python app.py
 | T10 | 关闭并重新启动系统 | 通过（数据仍可查询） |
 
 - 手工验收：**10/10，100%**
+- 2026-11-14 复测：**10/10，100%**
 - 自动化回归：**16/16，100%**
 - 严重/一般缺陷：**0**
-- 详细记录：[需求验收表](docs/需求验收表.md) · [测试记录](docs/StudyTask_测试记录.docx)
+- 详细记录：[需求验收表](docs/需求验收表.md) · [初测记录](docs/StudyTask_测试记录.docx) · [复测记录](docs/验收复测记录_2026-11-14.docx)
 
 ## 数据与日期规则
 
