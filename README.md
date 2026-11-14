@@ -61,10 +61,12 @@ studytask/
 │  ├─ 需求验收表.md
 │  ├─ StudyTask_测试记录.docx    # 2026-11-11 初测，16 页，含 16 张实际运行截图
 │  ├─ 验收复测记录_2026-11-14.docx # 2026-11-14 独立数据库复测，T1—T10
-│  ├─ 实验报告.docx              # 4 页
+│  ├─ T3_T5_补充复测_2026-11-14.docx # 用户补充截图：T3 优先级、T5 高优先级筛选
+│  ├─ 实验报告_2026-11-14.docx    # 4 页
 │  ├─ 演示PPT.pptx               # 8 页
 │  ├─ screenshots/              # README/报告/PPT 用图
-│  └─ retest/screenshots/       # 复测截图
+│  ├─ retest/screenshots/       # 复测截图
+│  └─ retest/supplement/        # T3/T5 补充截图
 ├─ AI_DEV_LOG.md                # AI 协作过程记录
 ├─ requirements.txt
 ├─ render.yaml / Dockerfile / Procfile
@@ -120,7 +122,7 @@ python app.py
 
 测试覆盖：创建与校验、边界值、列表/详情、编辑、删除确认、状态流转、组合筛选、逾期/即将到期、统计、持久化、404、200 条任务规模、init-db 幂等性。
 
-2026-11-14 使用独立数据库和相对当前日期重新执行 T1—T10，结果为 **10/10 通过**，详见 [验收复测记录](docs/验收复测记录_2026-11-14.docx)。
+2026-11-14 使用独立数据库和相对当前日期重新执行 T1—T10，结果为 **10/10 通过**，详见 [验收复测记录](docs/验收复测记录_2026-11-14.docx)。用户补充的 T3 优先级修改和 T5 高优先级筛选截图，见 [T3/T5 补充复测记录](docs/T3_T5_补充复测_2026-11-14.docx)。
 
 ## T1—T10 验收结果
 
@@ -189,8 +191,10 @@ docker run --rm -p 8000:8000 studytask
 |---|---|
 | 源代码、依赖、启动说明 | 本仓库、`README.md`、`requirements.txt` |
 | 需求验收表（T1—T10） | [docs/需求验收表.md](docs/需求验收表.md) |
-| 测试记录（16 页/16 图） | [docs/StudyTask_测试记录.docx](docs/StudyTask_测试记录.docx) |
-| 不超过 4 页的实验报告 | [docs/实验报告.docx](docs/实验报告.docx) |
+| 测试记录（初测 16 页/16 图） | [docs/StudyTask_测试记录.docx](docs/StudyTask_测试记录.docx) |
+| 验收复测记录（2026-11-14） | [docs/验收复测记录_2026-11-14.docx](docs/验收复测记录_2026-11-14.docx) |
+| T3/T5 补充复测 | [docs/T3_T5_补充复测_2026-11-14.docx](docs/T3_T5_补充复测_2026-11-14.docx) |
+| 不超过 4 页的实验报告 | [docs/实验报告_2026-11-14.docx](docs/实验报告_2026-11-14.docx) |
 | 演示 PPT | [docs/演示PPT.pptx](docs/演示PPT.pptx) |
 | AI 协作记录 | [AI_DEV_LOG.md](AI_DEV_LOG.md) |
 | 自动化测试 | [tests/test_tasks.py](tests/test_tasks.py) |
