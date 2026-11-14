@@ -8,10 +8,11 @@
 ## 演示与代码仓库
 
 - GitHub 仓库：<https://github.com/hwjing310/StudyTask>
+- 在线演示：<https://studytask-hwjing310.thevibehosting.com>
 - 本地 Web 地址：<http://127.0.0.1:5000>
-- 公网部署入口：<https://render.com/deploy?repo=https://github.com/hwjing310/StudyTask>（登录 Render 后按 Blueprint 创建，部署完成后会生成 `*.onrender.com` 地址）
+- 备用部署：<https://render.com/deploy?repo=https://github.com/hwjing310/StudyTask>（Render 登录后按 Blueprint 创建）
 
-> 仓库中的 `render.yaml` 已配置构建和启动命令。临时隧道地址不写入仓库，避免失效链接；课程提交时请使用自己部署生成的固定公网地址。
+> 在线演示部署在独立 Linux 主机上，使用 Gunicorn + SQLite，数据保存在服务器磁盘，不依赖本机运行。免费实例空闲时会休眠，首次访问约 1—3 秒唤醒。
 
 ## 功能范围
 
