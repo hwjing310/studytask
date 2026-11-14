@@ -65,6 +65,9 @@ studytask/
 │  ├─ T3_T5_补充复测_2026-11-14.docx # 用户补充截图：T3 优先级、T5 高优先级筛选
 │  ├─ 实验报告_2026-11-14.docx    # 4 页
 │  ├─ 演示PPT.pptx               # 8 页
+│  ├─ StudyTask_完整对话记录.docx # 本次全部对话（15 页，5 张用户截图）
+│  ├─ StudyTask_完整对话记录.md   # 对话 Markdown 版本
+│  ├─ dialogue/images/           # 用户上传截图
 │  ├─ screenshots/              # README/报告/PPT 用图
 │  ├─ retest/screenshots/       # 复测截图
 │  └─ retest/supplement/        # T3/T5 补充截图
@@ -184,7 +187,7 @@ docker run --rm -p 8000:8000 studytask
 
 然后访问 <http://127.0.0.1:8000>。
 
-> 注意：免费云平台的容器文件系统通常不是持久的，重启/重建后 SQLite 数据可能丢失。课程验收的持久化要求在本地环境完成；若需长期公网使用，应挂载持久磁盘或改用托管数据库。
+> 注意：当前在线演示使用带持久磁盘的 VibeHosting 实例，SQLite 数据会保留；如果改用 Render 免费实例，容器文件系统通常不是持久的，重启/重建后数据可能丢失，需要挂载磁盘或改用托管数据库。
 
 ## 提交材料
 
@@ -197,6 +200,7 @@ docker run --rm -p 8000:8000 studytask
 | T3/T5 补充复测 | [docs/T3_T5_补充复测_2026-11-14.docx](docs/T3_T5_补充复测_2026-11-14.docx) |
 | 不超过 4 页的实验报告 | [docs/实验报告_2026-11-14.docx](docs/实验报告_2026-11-14.docx) |
 | 演示 PPT | [docs/演示PPT.pptx](docs/演示PPT.pptx) |
+| 完整对话记录 | [docs/StudyTask_完整对话记录.docx](docs/StudyTask_完整对话记录.docx) · [Markdown](docs/StudyTask_完整对话记录.md) |
 | AI 协作记录 | [AI_DEV_LOG.md](AI_DEV_LOG.md) |
 | 自动化测试 | [tests/test_tasks.py](tests/test_tasks.py) |
 
